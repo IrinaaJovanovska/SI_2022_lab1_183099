@@ -1,0 +1,106 @@
+1. Завршив со инсталирање на Git, исто така се регистрирав на Github.
+
+2. Го променив името на главната гранка во master.
+
+3. Креирав мој remote репозиториум.
+
+4. Го клонирав remote репозиториумот локално:
+   $git clone https://github.com/IrinaaJovanovska/SI_2022_lab1_183099
+
+   Влегувам во локалниот репозиториум:
+   $cd SI_2022_lab1_183099
+
+5. Во локалниот репозиториум отворам нова текстуална датотека со командата:  touch shopping_list.txt, но сеуште го немаме во евиденција тој фајл, па ја употребив командата $ git add shopping_list.txt. Додавам 5 случајни производи (секој во нов ред) и правам commit со командата $ git commit -m “Add 5 items to the shopping list”
+и еве го излезот:
+[master c1008e0] Add 5 items to the shopping_list
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 shopping_list.txt
+
+6. Ги додавам количините до секој производ во shopping_list.txt, и пробувам да направам $ git commit -m “Add quantities to the items.”, но без успех, бидејќи немаме фајл на сцената (фајлот е во фаза modified) и не може да се направи commit, затоа ќе ја искористам следната команда:
+
+$ git commit -a -m "Add quantities to the items" со излез:
+
+[master a8d7f72] Add quantities to the items
+ 1 file changed, 5 insertions(+)
+
+7. Креирам две нови гранки
+    $ git branch branch1
+    $ git branch branch2
+
+8. Внесено!
+
+9.  Синхронизација со remote репозиториумот со командата:
+    $ git fetch
+    Правам git push со remote репозиториумот.
+
+10. Се префрлам на гранката branch1:
+$ git checkout branch1
+Switched to branch 'branch1'
+
+11. Ја менувам 5 -та ставка од датотеката и комитувам:
+$ nano shopping_list.txt
+$ git commit -a -m "Change quantity of item #5"
+[branch1 90bbc32] Change quantity of item #5
+1 file changed, 1 insertion(+), 1 deletion(-)
+
+12. Се враќам на мастер:
+$ git checkout master
+Switched to branch 'master'
+$git merge branch1
+
+13. Ја менувам втората ставка од датотеката и комитувам:
+$ git commit -a -m "Change quantity of item #2"
+[master 7124569] Chane quantity of item #2
+1 file changed, 1 insertion(+), 1 deletion(-)
+
+14. Синхронизација
+    $ git fetch    
+
+15. Се префрлам на гранка branch2
+   $ git checkout branch2
+   Switched to branch 'branch2'
+
+16. Го менувам името на ставка 4 и комитувам:
+$ nano shopping_list.txt
+$ git commit -a -m "Modify item #4"
+[branch2 060771e] Modify item #4
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+17. Внесено!
+
+18. Додадов 6та ставка во shopping_list.txt и комитувам:
+$ nano shopping_list.txt
+$ git commit -a -m "Modify item #4 and add item #6"
+[branch2 1718bcb] Modify item #4 and add item #6
+ 1 file changed, 1 insertion(+)
+
+19. Внесено!
+
+20. Се префрлам на мастер и ја спојувам гранката 1 со мастер:
+$ git checkout master
+Switched to branch 'master'
+
+$ git merge branch1
+Auto-merging shopping_list.txt
+Merge made by the 'recursive' strategy.
+ shopping_list.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+-Oва се прави со рекурзивна стратегија бидејќи претходно извршив промени на мастер.
+
+21. Ја спојувам гранката branch2 кон master:
+$ git merge branch2
+Auto-merging shopping_list.txt
+CONFLICT (content): Merge conflict in shopping_list.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+Се јавува конфликт бидејќи и двете гранки го менуваат истиот фајл, сега за да го разрешам тој конфликт ќе го отворам фајлот и ќе ги избришам сите автоматски генерирани текстови, показатели и слично. Го зачувувам документот.
+Го ставам фајлот на сцена: $ git add shopping_list.txt, потоа пишувам: $git merge --continue. Се јавува прозорец. Пишувам :wq, па стискам ентер. 
+
+22. Ја додавам оваа текстуална датотека на remote.
+$git add 183099.txt
+$git commit -m "Add docs"
+
+23. Синхронизација на сите гранки со remote:
+ $ git push -u origin master
+
+
